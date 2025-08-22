@@ -42,16 +42,19 @@ int main(int argc, char** argv)
     auto joint_positions = rdi.get_joint_positions();
     RCLCPP_INFO_STREAM(node->get_logger(),"joint positions = " << joint_positions);
 
+    VectorXd target_velocities =  VectorXd::Zero(joint_positions.size());
+    double gain = 0.2;
 
     // For some iterations. Note that this can be stopped with CTRL+C.
-    for(auto i=0;i<5000;++i)
+    for(auto i=0;i<10000;++i)
     {
         clock.update_and_sleep();
 
-        // Move the joints
-        //auto target_joint_positions = joint_positions + VectorXd::Ones(joint_positions.size())*deg2rad(10.0 * sin(i / (50.0 * pi)));
-        // print(target_joint_positions)
-        //rdi.send_target_joint_positions(target_joint_positions);
+        //Move the joints
+        auto target_joint_positions = joint_positions + VectorXd::Ones(joint_positions.size())*deg2rad(10.0 * sin(i / (100.0 * pi)));
+        std::cout<<target_joint_positions.transpose()<<std::endl;
+        rdi.send_target_joint_positions(target_joint_positions);
+        rdi.send_target_joint_velocities(gain*(target_joint_positions-rdi.get_joint_positions()));
 
         rclcpp::spin_some(node);
     }
