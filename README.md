@@ -12,6 +12,8 @@
 > [!WARNING]
 > This code will move the robot. Ensure that the workspace is clear and safe for operation.
 
+> [!CAUTION]
+> Be ready to perform an emergency stop! 
 
 
 
