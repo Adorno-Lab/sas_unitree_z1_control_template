@@ -12,6 +12,15 @@
 > [!WARNING]
 > This code will move the robot. Ensure that the workspace is clear and safe for operation.
 
+
+
+https://github.com/user-attachments/assets/860ca675-9e7d-435b-b1ca-c6488625d404
+
+
+
+
+
+
 1. Set up your Unitree Z1 arm
 
 2. Run this in your terminal
