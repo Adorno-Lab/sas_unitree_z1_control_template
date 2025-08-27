@@ -24,3 +24,13 @@ cd ~/git/sas_unitree_z1_control_template/devel/robot_demo
 xhost +local:root
 docker compose up
 ```
+
+### Simulation 
+
+```shell
+mkdir -p ~/git
+cd ~/git && git clone https://github.com/Adorno-Lab/sas_unitree_z1_control_template.git --recursive
+cd ~/git/sas_unitree_z1_control_template/devel/coppeliasim_demo
+xhost +local:root
+docker compose up
+```
