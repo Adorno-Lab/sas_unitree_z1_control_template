@@ -25,7 +25,7 @@ services:
       DISPLAY: $DISPLAY # x server related
     privileged: true # Needed for some gpu configurations.
     volumes:
-      - sas-ur-control-template-repo-data:/root/sas_tutorial_workspace/src/sas_ur_control_template/
+      - sas-unitree-z1-control-control-template-repo-data:/root/ros2_ws/src/sas_unitree_z1_control_template/
       - /tmp/.X11-unix:/tmp/.X11-unix # x server related
       - ~/.Xauthority:/root/.Xauthority # x server related
     network_mode: "host" # x server related
