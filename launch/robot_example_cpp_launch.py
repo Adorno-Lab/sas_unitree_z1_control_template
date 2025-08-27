@@ -13,7 +13,7 @@ def generate_launch_description():
     real_robot_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(
             get_package_share_directory('sas_unitree_z1_control_template'), 'launch'),
-            '/_real_z1_robot_launch.py'])
+            '/real_z1_robot_launch.py'])
     )
 
     return LaunchDescription([
