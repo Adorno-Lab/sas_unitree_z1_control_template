@@ -15,12 +15,8 @@
 
 
 
+
 https://github.com/user-attachments/assets/eb8c6c1e-ea05-46ca-8bcf-b488a4fe1f3b
-
-
-
-
-
 
 
 1. Set up your Unitree Z1 arm
@@ -37,6 +33,8 @@ docker compose up
 ```
 
 ### Simulation 
+
+<img width="1000" alt="Screenshot from 2025-08-27 17-50-42" src="https://github.com/user-attachments/assets/ae205645-95c9-413d-81ef-e2ee3b33acb4" />
 
 ```shell
 mkdir -p ~/git
