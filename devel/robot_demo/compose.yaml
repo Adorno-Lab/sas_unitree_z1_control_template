@@ -29,5 +29,5 @@ services:
       cd /root/ros2_ws/src/sas_unitree_z1_control_template/devel/scripts/
       && chmod +x build_packages.sh && chmod +x countdown.sh;
       . /root/ros2_ws/src/sas_unitree_z1_control_template/devel/scripts/build_packages.sh;
-      . /root/ros2_ws/src/sas_unitree_z1_control_template/devel/scripts/countdown.sh 5;
+      . /root/ros2_ws/src/sas_unitree_z1_control_template/devel/scripts/countdown.sh 10;
       ros2 launch sas_unitree_z1_control_template robot_example_cpp_launch.py "
