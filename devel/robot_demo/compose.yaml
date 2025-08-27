@@ -1,0 +1,44 @@
+services:
+  z1_controller:
+    build: ../docker/z1_controller/
+    privileged: true
+    network_mode: "host" 
+    ipc: "host"
+    stop_grace_period: 40s
+    environment:
+      DISPLAY: $DISPLAY
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix # x server related
+      - ~/.Xauthority:/root/.Xauthority # x server related   
+    command: /bin/bash  
+
+  sas_robot_driver_unitree_z1:
+    build: ../docker/sas_robot_driver_unitree_z1
+    privileged: true
+    network_mode: "host" 
+    ipc: "host"
+    stop_signal: SIGINT
+    stop_grace_period: 30s
+    environment:
+      DISPLAY: $DISPLAY
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix # x server related
+      - ~/.Xauthority:/root/.Xauthority # x server related  
+    command: /bin/bash -c "
+      export ROS_DOMAIN_ID=1;
+      cd /root/git/sas_robot_driver_unitree_z1/dependencies/
+      && chmod +x build_packages.sh && chmod +x countdown.sh
+      && . /root/git/sas_robot_driver_unitree_z1/dependencies/build_packages.sh
+      && . /root/git/sas_robot_driver_unitree_z1/dependencies/countdown.sh 10 
+      && ros2 launch sas_robot_driver_unitree_z1 real_z1_robot_launch.py "
+
+
+
+
+    #command: /bin/bash -c "
+    #  source /opt/ros/jazzy/setup.bash;
+    #  export ROS_DOMAIN_ID=1;
+    #  cd ~/ros2_ws/ && colcon build;
+    #  source ~/ros2_ws/install/setup.bash;
+    #  sleep 4;
+    #  ros2 launch sas_robot_driver_unitree_z1 real_z1_robot_launch.py "
