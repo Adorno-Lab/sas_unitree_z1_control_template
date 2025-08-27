@@ -23,6 +23,12 @@ def generate_launch_description():
             executable='joint_interface_example_cpp',
             output='screen',
             emulate_tty=True,
-            name='sas_unitree_z1_control_template_joint_interface_example_cpp'
+            name='sas_unitree_z1_control_template_joint_interface_example_cpp',
+            parameters=[{
+                "thread_sampling_time_sec": 0.002, 
+                "topic_namespace": "/sas_z1/z1_1",
+                "move_robot_to_initial_configuration": False, # Do not use 'move_robot_to_initial_configuration = True' when using the real robot!!!
+                "initial_configuration": [0.0, 90.0,-60.0,-30.0, 0.0, -90.0, 0]
+            }]
         )
     ])
