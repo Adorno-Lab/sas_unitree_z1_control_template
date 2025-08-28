@@ -2,6 +2,11 @@
 
 # sas_unitree_z1_control_template
 
+> [!TIP]
+> SmartArmStack powers this template.
+> More information about SmartArmStack is available at https://smartarmstack.github.io/.
+
+This is a control template for Unitree Z1 robotic manipulators. It relies on [sas_robot_driver_unitree_z1](https://github.com/Adorno-Lab/sas_robot_driver_unitree_z1).
 
 ### Real Platform
 
