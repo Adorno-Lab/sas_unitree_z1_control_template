@@ -2,7 +2,9 @@ services:
   sas_unitree_z1_control_template:
     build: ../sas_unitree_z1_control_template
     privileged: true
-    network_mode: "host" 
+    #network_mode: "host" 
+    networks:
+      - custom-network
     ipc: "host"
     stdin_open: true    # Equivalent to -i (interactive)
     tty: true           # Equivalent to -t (pseudo-TTY)
@@ -10,27 +12,32 @@ services:
     stop_grace_period: 30s
     environment:
       DISPLAY: host.docker.internal:0
+      COPPELIASIM_IP: coppeliasim  # Use Docker service name
     volumes:
-      - sas-unitree-z1-control-control-template-repo-data:/root/ros2_ws/src/sas_unitree_z1_control_template/
+      - sas-unitree-z1-control-control-template-repo-data:/root/ros2_ws/src/sas_unitree_z1_control_template/      
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     command: /bin/bash -c "
       export ROS_DOMAIN_ID=1;
       cd /root/ros2_ws/src/sas_unitree_z1_control_template/devel/scripts/
       && chmod +x build_packages.sh;
       . /root/ros2_ws/src/sas_unitree_z1_control_template/devel/scripts/build_packages.sh;
-      ros2 launch sas_unitree_z1_control_template simulation_example_cpp_launch.py  coppeliasim_timeout:=30000"
+      ros2 launch sas_unitree_z1_control_template simulation_example_cpp_launch.py  coppeliasim_ip:='coppeliasim' coppeliasim_timeout:=30000"
 
   coppeliasim:
     image: murilomarinho/coppeliasim:noble_470rev4
     stop_signal: SIGINT
     platform: linux/amd64
     environment:
-      DISPLAY: host.docker.internal:0 #$DISPLAY # x server related
+      DISPLAY: host.docker.internal:0 # x server related host.docker.internal:0
     #privileged: true # Needed for some gpu configurations.
     volumes:
       - sas-unitree-z1-control-control-template-repo-data:/root/ros2_ws/src/sas_unitree_z1_control_template/
       - /tmp/.X11-unix:/tmp/.X11-unix # x server related
       - ~/.Xauthority:/root/.Xauthority # x server related
     #network_mode: "host" # x server related
+    networks:
+      - custom-network
     ipc: "host"
     stdin_open: true    # Equivalent to -i (interactive)
     tty: true           # Equivalent to -t (pseudo-TTY)
@@ -40,3 +47,7 @@ services:
 
 volumes:
   sas-unitree-z1-control-control-template-repo-data:
+
+networks:
+  custom-network:
+    driver: bridge
