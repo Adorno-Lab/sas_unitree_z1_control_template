@@ -8,7 +8,6 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
-find_package(sas_robot_driver_ur REQUIRED)
 find_package(sas_robot_driver REQUIRED)
 find_package(sas_core REQUIRED)
 
